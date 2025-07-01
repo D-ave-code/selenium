@@ -90,9 +90,30 @@ print ( dia_fin)
 nombre = str(dia_inicio) + "-"+ str(dia_fin) + "-"+str(hora_envio).replace(":", "-")  
 print (nombre)
 tomar_captura_completa(driver, "_inicio_" + nombre)
-submit_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Enviar')]")
-submit_button.click()
-#time.sleep(3)
+
+# Buscar botón de envío - primero español, luego inglés
+submit_button = None
+
+try:
+    # Intentar primero en español
+    submit_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Enviar')]")
+    print("[OK] Botón 'Enviar' encontrado")
+except:
+    try:
+        # Si no encuentra en español, intentar en inglés
+        submit_button = driver.find_element(By.XPATH, "//span[contains(text(), 'Submit')]")
+        print("[OK] Botón 'Submit' encontrado")
+    except:
+        print("[ERROR] No se encontró botón de envío")
+
+# Hacer click si encontró el botón
+if submit_button:
+    submit_button.click()
+    print("[OK] Formulario enviado")
+else:
+    print("[WARNING] No se pudo enviar el formulario")
+
+time.sleep(3)
 tomar_captura_completa(driver, "_final_" + nombre )
 driver.quit()
 #time.sleep(2)
