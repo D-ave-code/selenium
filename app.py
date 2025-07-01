@@ -54,6 +54,7 @@ tipo_comida = 0
 nombre_xpath = '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input'
 nombre_input = driver.find_element(By.XPATH, nombre_xpath)
 nombre_input.send_keys("2846981")
+ultimatix_valor = "2846981"
 #time.sleep(1)
 # Llenar campo "nombre"
 ultimatix_xpath = '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input'
@@ -89,7 +90,7 @@ time.sleep(1)  # Esperar un poco para que se renderice bien
 print ( dia_fin)
 nombre = str(dia_inicio) + "-"+ str(dia_fin) + "-"+str(hora_envio).replace(":", "-")  
 print (nombre)
-tomar_captura_completa(driver, "_inicio_" + nombre)
+tomar_captura_completa(driver, ultimatix_valor + "_inicio_" + nombre)
 
 # Buscar botón de envío - primero español, luego inglés
 submit_button = None
@@ -114,7 +115,7 @@ else:
     print("[WARNING] No se pudo enviar el formulario")
 
 time.sleep(3)
-tomar_captura_completa(driver, "_final_" + nombre )
+tomar_captura_completa(driver, ultimatix_valor + "_final_" + nombre )
 driver.quit()
 #time.sleep(2)
 if edificio == 5 and dias == 5 and tipo_comida == 5:
